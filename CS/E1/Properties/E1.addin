@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Assembly>C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\bin\x64\Debug\E1.dll</Assembly>
+		<ClientId>502fe383-2648-4e98-adf8-5e6047f9dc34</ClientId>
+		<FullClassName>Lab1PlaceGroup</FullClassName>
+		<Text>Lab1PlaceGroup</Text>
+		<VendorId>ADSK</VendorId>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+	</AddIn>
+</RevitAddIns>

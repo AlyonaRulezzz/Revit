@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Name>Exercise_1</Name>
+		<FullClassName>E1.ex1</FullClassName>
+		<Text> Exercise_1 </Text>
+		<Description> Exercise_1 </Description>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+		<Assembly>
+			C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\bin\x64\Debug\E1.dll
+		</Assembly>
+		<AddInId>502fe383-2648-4e98-adf8-5e6047f9dc35</AddInId>
+		<VendorId>Me</VendorId>
+		<VendorDescription>Me</VendorDescription>
+	</AddIn>
+</RevitAddIns>

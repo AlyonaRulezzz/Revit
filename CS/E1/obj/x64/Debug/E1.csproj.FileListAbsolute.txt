@@ -1,0 +1,7 @@
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\bin\x64\Debug\E1.dll
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\bin\x64\Debug\E1.pdb
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\obj\x64\Debug\E1.csproj.AssemblyReference.cache
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\obj\x64\Debug\E1.csproj.CoreCompileInputs.cache
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\obj\x64\Debug\E1.dll
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\obj\x64\Debug\E1.pdb
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E1\bin\x64\Debug\Properties\E1.addin
