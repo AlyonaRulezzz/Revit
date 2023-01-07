@@ -1,0 +1,6 @@
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E2\bin\Debug\E2.dll
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E2\bin\Debug\E2.pdb
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E2\obj\Debug\E2.csproj.AssemblyReference.cache
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E2\obj\Debug\E2.csproj.CoreCompileInputs.cache
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E2\obj\Debug\E2.dll
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E2\obj\Debug\E2.pdb
