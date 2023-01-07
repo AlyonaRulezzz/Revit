@@ -23,7 +23,7 @@ namespace E1
 
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             collector.OfCategory(BuiltInCategory.OST_Rooms);
-            Room room = null;
+            //Room room = null;
 
             IList<IList<BoundarySegment>> segments;
 
@@ -31,8 +31,7 @@ namespace E1
 
             foreach (Element elem in collector)
             {
-                room = elem as Room;
-                if (room != null)
+                if (elem is Room room)
                 {
                     segments = room.GetBoundarySegments(new SpatialElementBoundaryOptions());
                     rooms_with_walls.Add(elem.Id + ", " + elem.Name, "");
@@ -42,7 +41,8 @@ namespace E1
                         foreach (BoundarySegment seg in segments_i)
                         {
                             Wall wall = room.Document.GetElement(seg.ElementId) as Wall;
-                            rooms_with_walls[elem.Id + ", " + elem.Name] += wall.Name + ", " + wall.Id + "\n";
+                            rooms_with_walls[elem.Id + ", " + elem.Name] +=
+                                                                    "\t\t" + wall.Name + ", " + wall.Id + "\n";
                         }
                     }
                 }
