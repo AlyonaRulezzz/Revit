@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace E1
 {
     [Transaction(TransactionMode.Manual)]
-    public class ex1 : IExternalCommand
+    public class Ex1 : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -21,60 +21,36 @@ namespace E1
 
             string mes = "";
 
-            FilteredElementCollector collector_walls = new FilteredElementCollector(doc);
-            collector_walls.OfCategory(BuiltInCategory.OST_Walls);
-            Wall wall = null;
-
-            FilteredElementCollector collector_rooms = new FilteredElementCollector(doc);
-            collector_rooms.OfCategory(BuiltInCategory.OST_Rooms);
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+            collector.OfCategory(BuiltInCategory.OST_Rooms);
             Room room = null;
 
             IList<IList<BoundarySegment>> segments;
 
             SortedDictionary<string, string> rooms_with_walls = new SortedDictionary<string, string>();
 
-            foreach (Element elem_r in collector_rooms)
+            foreach (Element elem in collector)
             {
-                room = elem_r as Room;
+                room = elem as Room;
                 if (room != null)
                 {
                     segments = room.GetBoundarySegments(new SpatialElementBoundaryOptions());
-                    //mes += elem.Name + ", " + elem.Id + "\n";
-                    rooms_with_walls.Add(elem_r.Name, "");
+                    rooms_with_walls.Add(elem.Id + ", " + elem.Name, "");
 
-                    /*foreach (Element elem_w in collector_walls)
+                    foreach (IList<BoundarySegment> segments_i in segments)
                     {
-                        wall = elem_w as Wall;
-                        if (wall != null)
-                        {*/
-                            //rooms_with_walls[elem_r.Name] += " a";
-                            //mes += elem.Name + ", " + elem.Id + "\n";
-
-                            foreach (IList<BoundarySegment> segments_i in segments)
-                            {
-                                foreach (BoundarySegment seg in segments_i)
-                                {
-                                    /* if (curve.Equals(seg))
-                                     {
-                                        rooms_with_walls[elem_r.Name] += elem_w.Id + " ";
-                                    }*/
-                                    //Element e = seg.GetCurve();
-                                    Wall wall_1 = room.Document.GetElement(seg.ElementId) as Wall;
-                                    LocationCurve locationCurve = wall_1.Location as LocationCurve;
-                                    Curve curve = locationCurve.Curve;
-                                    rooms_with_walls[elem_r.Name] += wall_1.Name + " ";
-                                }
-                            }
-                            
-                        /*}
-                    }*/
-
+                        foreach (BoundarySegment seg in segments_i)
+                        {
+                            Wall wall = room.Document.GetElement(seg.ElementId) as Wall;
+                            rooms_with_walls[elem.Id + ", " + elem.Name] += wall.Name + ", " + wall.Id + "\n";
+                        }
+                    }
                 }
             }
 
             foreach (string key in rooms_with_walls.Keys)
             {
-                mes += key + ": " + rooms_with_walls[key] + " ------- из мапы\n";
+                mes += key + ":\n" + rooms_with_walls[key] + "\n";
 
             }
 

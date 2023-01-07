@@ -2,7 +2,7 @@
 <RevitAddIns>
 	<AddIn Type="Command">
 		<Name>Exercise_1</Name>
-		<FullClassName>E1.ex1</FullClassName>
+		<FullClassName>E1.Ex1</FullClassName>
 		<Text> Exercise_1 </Text>
 		<Description> Exercise_1 </Description>
 		<VisibilityMode>AlwaysVisible</VisibilityMode>
