@@ -23,9 +23,6 @@ namespace E1
 
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             collector.OfCategory(BuiltInCategory.OST_Rooms);
-            //Room room = null;
-
-            IList<IList<BoundarySegment>> segments;
 
             SortedDictionary<string, string> rooms_with_walls = new SortedDictionary<string, string>();
 
@@ -33,7 +30,8 @@ namespace E1
             {
                 if (elem is Room room)
                 {
-                    segments = room.GetBoundarySegments(new SpatialElementBoundaryOptions());
+                    IList<IList<BoundarySegment>> segments =
+                                                    room.GetBoundarySegments(new SpatialElementBoundaryOptions());
                     rooms_with_walls.Add(elem.Id + ", " + elem.Name, "");
 
                     foreach (IList<BoundarySegment> segments_i in segments)
@@ -41,8 +39,7 @@ namespace E1
                         foreach (BoundarySegment seg in segments_i)
                         {
                             Wall wall = room.Document.GetElement(seg.ElementId) as Wall;
-                            rooms_with_walls[elem.Id + ", " + elem.Name] +=
-                                                                    "\t\t" + wall.Name + ", " + wall.Id + "\n";
+                            rooms_with_walls[elem.Id + ", " + elem.Name] += wall.Name + ", " + wall.Id + "\n\t\t";
                         }
                     }
                 }
@@ -50,7 +47,7 @@ namespace E1
 
             foreach (string key in rooms_with_walls.Keys)
             {
-                mes += key + ":\n" + rooms_with_walls[key] + "\n";
+                mes += key + ":\n\t\t" + rooms_with_walls[key] + "\n";
 
             }
 
