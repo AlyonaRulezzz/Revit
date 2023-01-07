@@ -23,83 +23,59 @@ namespace E1
 
             FilteredElementCollector collector_walls = new FilteredElementCollector(doc);
             collector_walls.OfCategory(BuiltInCategory.OST_Walls);
-
             Wall wall = null;
-            foreach (Element elem in collector_walls)
-            {
-                wall = elem as Wall;
-                if (wall != null)
-                {
-                    mes += elem.Name + ", " + elem.Id + "\n";
-                }
-            }
-
-            SortedDictionary<string, string> rooms_with_walls =
-            new SortedDictionary<string, string>();
 
             FilteredElementCollector collector_rooms = new FilteredElementCollector(doc);
             collector_rooms.OfCategory(BuiltInCategory.OST_Rooms);
             Room room = null;
-            foreach (Element elem in collector_rooms)
+
+            IList<IList<BoundarySegment>> segments;
+
+            SortedDictionary<string, string> rooms_with_walls = new SortedDictionary<string, string>();
+
+            foreach (Element elem_r in collector_rooms)
             {
-                room = elem as Room;
+                room = elem_r as Room;
                 if (room != null)
                 {
+                    segments = room.GetBoundarySegments(new SpatialElementBoundaryOptions());
                     //mes += elem.Name + ", " + elem.Id + "\n";
-                    Getinfo_Room(room);
-                    rooms_with_walls.Add(elem.Name, "");
+                    rooms_with_walls.Add(elem_r.Name, "");
+
+                    /*foreach (Element elem_w in collector_walls)
+                    {
+                        wall = elem_w as Wall;
+                        if (wall != null)
+                        {*/
+                            //rooms_with_walls[elem_r.Name] += " a";
+                            //mes += elem.Name + ", " + elem.Id + "\n";
+
+                            foreach (IList<BoundarySegment> segments_i in segments)
+                            {
+                                foreach (BoundarySegment seg in segments_i)
+                                {
+                                    /* if (curve.Equals(seg))
+                                     {
+                                        rooms_with_walls[elem_r.Name] += elem_w.Id + " ";
+                                    }*/
+                                    //Element e = seg.GetCurve();
+                                    Wall wall_1 = room.Document.GetElement(seg.ElementId) as Wall;
+                                    LocationCurve locationCurve = wall_1.Location as LocationCurve;
+                                    Curve curve = locationCurve.Curve;
+                                    rooms_with_walls[elem_r.Name] += wall_1.Name + " ";
+                                }
+                            }
+                            
+                        /*}
+                    }*/
+
                 }
             }
 
             foreach (string key in rooms_with_walls.Keys)
             {
-                mes += rooms_with_walls[key] + " ------- из мапы\n";
-            }
+                mes += key + ": " + rooms_with_walls[key] + " ------- из мапы\n";
 
-            void Getinfo_Room(Room rms)
-            {
-                string m = "Room: ";
-
-                //get the name of the room
-                m += "\nRoom Name: " + rms.Name;
-
-                //get the room position
-                LocationPoint location = rms.Location as LocationPoint;
-                XYZ point = location.Point;
-                m += "\nRoom position: " + XYZToString(point);
-
-                //get the room number
-                m += "\nRoom number: " + rms.Number;
-
-                IList<IList<Autodesk.Revit.DB.BoundarySegment>> segments = rms.GetBoundarySegments(new SpatialElementBoundaryOptions());
-                if (null != segments)  //the room may not be bound
-                {
-                    foreach (IList<Autodesk.Revit.DB.BoundarySegment> segmentList in segments)
-                    {
-                        m += "\nBoundarySegment of the room: ";
-                        foreach (Autodesk.Revit.DB.BoundarySegment boundarySegment in segmentList)
-                        {
-                            // Get curve start point
-                            XYZ start = boundarySegment.GetCurve().GetEndPoint(0);
-                            m += "\nCurve start point: " + XYZToString(start);
-                            // Get curve end point
-                            XYZ end = boundarySegment.GetCurve().GetEndPoint(1);
-                            m += " Curve end point: " + XYZToString(end);
-
-                            // Show the boundary elements
-                            m += "\nBoundary element id: " + boundarySegment.ElementId.IntegerValue;
-                        }
-                    }
-                }
-
-                //TaskDialog.Show("Revit", m);
-                mes += m + "\n\n\n";
-            }
-
-            // output the point's three coordinates
-            string XYZToString(XYZ point)
-            {
-                return "(" + point.X + ", " + point.Y + ", " + point.Z + ")";
             }
 
             TaskDialog.Show("Задание 1", mes);
