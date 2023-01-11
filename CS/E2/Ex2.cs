@@ -2,15 +2,15 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-using System.Xml.Linq;
-using System.Reflection.Emit;
-using System.Security.Cryptography;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using static System.Net.Mime.MediaTypeNames;
+//using System.Xml.Linq;
+//using System.Reflection.Emit;
+//using System.Security.Cryptography;
 
 namespace E2
 {
@@ -26,34 +26,19 @@ namespace E2
             string mes = "Марки помещений изменены на АК Барс";
 
             FilteredElementCollector collector = new FilteredElementCollector(doc);
-            collector.OfCategory(BuiltInCategory.OST_Rooms);
+            collector.OfCategory(BuiltInCategory.OST_RoomTags);
 
-            FilteredElementCollector roomTags = 
-   new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_RoomTags).WhereElementIsNotElementType();
-            FilteredElementCollector roomTagTypes = 
-   new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_RoomTags).WhereElementIsElementType();
-
-            Element NewType = roomTagTypes.ToElements()[1];
-
-            foreach (Element elem in collector)
+            using (Transaction tran = new Transaction(doc))
             {
-            if (elem is Room room)
+                tran.Start("tran1");
+                foreach (Element elem in collector)
                 {
-                    using (Transaction tran = new Transaction(doc))
+                    if (elem is RoomTag roomTag)
                     {
-                        tran.Start("tran2");
-                        foreach (RoomTag rt in roomTags.ToElements())
-                        {
-                            //if (rooms.Contains(rt.TaggedLocalRoomId))
-                            //{
-                            rt.ChangeTypeId(NewType.Id);
-                            rt.RoomTagType.Name = "АК Барс";
-                            //}
-                        }
-
-                        tran.Commit();
+                        roomTag.RoomTagType.Name = "АК Барс";
                     }
                 }
+                tran.Commit();
             }
 
             TaskDialog.Show("Задание 2", mes);
