@@ -2,15 +2,6 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using static System.Net.Mime.MediaTypeNames;
-//using System.Xml.Linq;
-//using System.Reflection.Emit;
-//using System.Security.Cryptography;
 
 namespace E2
 {
