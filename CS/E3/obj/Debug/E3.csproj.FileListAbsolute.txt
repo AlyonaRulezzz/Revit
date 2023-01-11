@@ -1,0 +1,6 @@
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\bin\Debug\E3.dll
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\bin\Debug\E3.pdb
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\obj\Debug\E3.csproj.AssemblyReference.cache
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\obj\Debug\E3.csproj.CoreCompileInputs.cache
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\obj\Debug\E3.dll
+C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\obj\Debug\E3.pdb
