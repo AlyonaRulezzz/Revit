@@ -27,7 +27,6 @@ namespace E2
 
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             collector.OfCategory(BuiltInCategory.OST_Rooms);
-            //collector.OfCategory(BuiltInCategory.OST_RoomTags);
 
             FilteredElementCollector roomTags = 
    new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_RoomTags).WhereElementIsNotElementType();
@@ -36,19 +35,9 @@ namespace E2
 
             Element NewType = roomTagTypes.ToElements()[1];
 
-            /*foreach (RoomTag rt in roomTags.ToElements())
-            {
-                //if (rooms.Contains(rt.TaggedLocalRoomId))
-                //{
-                    rt.ChangeTypeId(NewType.Id);
-                //}
-            }*/
-
-
             foreach (Element elem in collector)
             {
             if (elem is Room room)
-            //if (elem is RoomTag roomTag)
                 {
                     using (Transaction tran = new Transaction(doc))
                     {
@@ -64,24 +53,6 @@ namespace E2
 
                         tran.Commit();
                     }
-
-                    //if (roomTagType != null)  //36958 RoomTag
-                    //ElementId newId = BuiltInParameter.;
-                    //elem.ChangeTypeId(newId);
-                    //elem.Name = "АК Барс";
-
-                    //Parameter parameter = roomTag.LookupParameter("Тип");
-                    //parameter.Set("АК Барс");
-                    //RoomTag roomTag= (RoomTag) elem;
-                    //roomTag.Name = "АК Барс";
-                    //Wall wall = room.Document.GetElement(seg.ElementId) as Wall;
-
-                    //foreach (Parameter parameter in elem.Parameters)
-                    //{
-                    //mes += parameter.Set("АК Барс") + "\n";
-                    //}
-
-                    //mes += elem.GetTypeId() + "   " + elem.GetType().Name + "  " + elem.Id + "\n";
                 }
             }
 
