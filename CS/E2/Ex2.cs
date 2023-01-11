@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using System.Reflection.Emit;
+using System.Security.Cryptography;
 
 namespace E2
 {
@@ -21,36 +23,66 @@ namespace E2
             UIApplication uiApp = commandData.Application;
             Document doc = uiApp.ActiveUIDocument.Document;
 
-            string mes = "";
+            string mes = "Марки помещений изменены на АК Барс";
 
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             collector.OfCategory(BuiltInCategory.OST_Rooms);
+            //collector.OfCategory(BuiltInCategory.OST_RoomTags);
 
-            SortedDictionary<string, string> rooms_with_walls = new SortedDictionary<string, string>();
+            FilteredElementCollector roomTags = 
+   new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_RoomTags).WhereElementIsNotElementType();
+            FilteredElementCollector roomTagTypes = 
+   new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_RoomTags).WhereElementIsElementType();
+
+            Element NewType = roomTagTypes.ToElements()[1];
+
+            /*foreach (RoomTag rt in roomTags.ToElements())
+            {
+                //if (rooms.Contains(rt.TaggedLocalRoomId))
+                //{
+                    rt.ChangeTypeId(NewType.Id);
+                //}
+            }*/
+
 
             foreach (Element elem in collector)
             {
-                if (elem is Room room)
+            if (elem is Room room)
+            //if (elem is RoomTag roomTag)
                 {
-                    IList<IList<BoundarySegment>> segments =
-                                                    room.GetBoundarySegments(new SpatialElementBoundaryOptions());
-                    rooms_with_walls.Add(elem.Id + ", " + elem.Name, "");
-
-                    foreach (IList<BoundarySegment> segments_i in segments)
+                    using (Transaction tran = new Transaction(doc))
                     {
-                        foreach (BoundarySegment seg in segments_i)
+                        tran.Start("tran2");
+                        foreach (RoomTag rt in roomTags.ToElements())
                         {
-                            Wall wall = room.Document.GetElement(seg.ElementId) as Wall;
-                            rooms_with_walls[elem.Id + ", " + elem.Name] += wall.Name + ", " + wall.Id + "\n\t\t";
+                            //if (rooms.Contains(rt.TaggedLocalRoomId))
+                            //{
+                            rt.ChangeTypeId(NewType.Id);
+                            rt.RoomTagType.Name = "АК Барс";
+                            //}
                         }
+
+                        tran.Commit();
                     }
+
+                    //if (roomTagType != null)  //36958 RoomTag
+                    //ElementId newId = BuiltInParameter.;
+                    //elem.ChangeTypeId(newId);
+                    //elem.Name = "АК Барс";
+
+                    //Parameter parameter = roomTag.LookupParameter("Тип");
+                    //parameter.Set("АК Барс");
+                    //RoomTag roomTag= (RoomTag) elem;
+                    //roomTag.Name = "АК Барс";
+                    //Wall wall = room.Document.GetElement(seg.ElementId) as Wall;
+
+                    //foreach (Parameter parameter in elem.Parameters)
+                    //{
+                    //mes += parameter.Set("АК Барс") + "\n";
+                    //}
+
+                    //mes += elem.GetTypeId() + "   " + elem.GetType().Name + "  " + elem.Id + "\n";
                 }
-            }
-
-            foreach (string key in rooms_with_walls.Keys)
-            {
-                mes += key + ":\n\t\t" + rooms_with_walls[key] + "\n";
-
             }
 
             TaskDialog.Show("Задание 2", mes);
