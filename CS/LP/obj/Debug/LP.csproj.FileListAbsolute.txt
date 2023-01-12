@@ -1,6 +1,0 @@
-C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\LP\bin\Debug\LP.dll
-C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\LP\bin\Debug\LP.pdb
-C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\LP\obj\Debug\LP.csproj.AssemblyReference.cache
-C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\LP\obj\Debug\LP.csproj.CoreCompileInputs.cache
-C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\LP\obj\Debug\LP.dll
-C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\LP\obj\Debug\LP.pdb

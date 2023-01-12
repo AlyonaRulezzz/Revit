@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Name>Exercise_3</Name>
+		<FullClassName>E3.Ex3</FullClassName>
+		<Text> Exercise_3 </Text>
+		<Description> Exercise_3 </Description>
+		<VisibilityMode>AlwaysVisible</VisibilityMode>
+		<Assembly>
+			C:\Users\Alyonka\Documents\Файлы\Тест АК Барс\CS\E3\bin\x64\Debug\E3.dll
+		</Assembly>
+		<AddInId>502fe383-2648-4e98-adf8-5e6047f9dc37</AddInId>
+		<VendorId>Me</VendorId>
+		<VendorDescription>Me</VendorDescription>
+	</AddIn>
+</RevitAddIns>
