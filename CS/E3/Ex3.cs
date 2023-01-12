@@ -2,11 +2,6 @@
 using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E3
 {
@@ -33,7 +28,7 @@ namespace E3
                     {
                         if (room.Name.Contains("Помещение"))
                         {
-                            mes += "Есть ошибки " + room.Id + "\n";
+                            mes += "Есть ошибки: " + room.Name + ", id = " + room.Id + "\n";
                         }
                     }
                 }
